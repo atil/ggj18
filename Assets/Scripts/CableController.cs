@@ -47,4 +47,14 @@ public class CableController : MonoBehaviour
             Cable.transform.up = (_currentTower.transform.position - CableSlot.position).normalized;
         }
     }
+
+    public void TowerOverloaded(Tower tower)
+    {
+        if (tower == _currentTower)
+        {
+            _isActive = false;
+            _currentTower = null;
+            Cable.gameObject.SetActive(false);
+        }
+    }
 }
