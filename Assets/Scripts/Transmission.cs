@@ -15,6 +15,9 @@ public class Transmission : MonoBehaviour
     public void TowersConnected(Tower a, Tower b)
     {
         _connectedTowers.Add(new Tuple<Tower, Tower>(a, b));
+        a.IsActive = true;
+        b.IsActive = true;
+
         var cableGo = Instantiate(CablePrefab) as GameObject;
         cableGo.transform.position = (a.transform.position + b.transform.position) / 2f;
         cableGo.transform.up = (a.transform.position - b.transform.position).normalized;
@@ -28,6 +31,7 @@ public class Transmission : MonoBehaviour
         var towers = new Queue<Tower>();
         towers.Enqueue(SourceTower);
 
+        var visitedTowers = new HashSet<Tower>();
         while (towers.Count != 0)
         {
             var cur = towers.Dequeue();
@@ -38,7 +42,8 @@ public class Transmission : MonoBehaviour
                 return;
             }
 
-            foreach (var t in ns)
+            visitedTowers.Add(cur);
+            foreach (var t in ns.FindAll(x => !visitedTowers.Contains(x)))
             {
                 towers.Enqueue(t);
             }
