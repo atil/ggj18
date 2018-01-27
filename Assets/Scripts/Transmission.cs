@@ -10,15 +10,24 @@ public class Transmission : MonoBehaviour
     public float FlowProgress;
     public GameObject CablePrefab;
     public AnimationCurve OverloadRateToTowerCount;
+    public AudioClip PowerUpClip;
+    public AudioClip PowerDownClip;
+
+    public Color SkyColorOnPowerDown;
+    public Color SkyColorDefault;
 
     private readonly List<Tuple<Tower, Tower>> _connectedTowers = new List<Tuple<Tower, Tower>>();
     private readonly Dictionary<Tuple<Tower, Tower>, GameObject> _cables = new Dictionary<Tuple<Tower, Tower>, GameObject>();
     private List<Tower> _towers;
     private bool _isTransmissionFlowing;
+    private Material _skyMaterial;
+    private Color _skyCurrentColor;
 
     void Start()
     {
         _towers = FindObjectsOfType<Tower>().ToList();
+        _skyMaterial = Camera.main.GetComponent<Skybox>().material;
+        StartCoroutine(SkyColorCoroutine());
     }
 
     public bool TowersConnected(Tower a, Tower b)
@@ -42,6 +51,11 @@ public class Transmission : MonoBehaviour
             b.OverloadProgress = 0f;
         }
         b.IsActive = true;
+
+        AudioSource.PlayClipAtPoint(PowerUpClip, a.transform.position);
+        AudioSource.PlayClipAtPoint(PowerUpClip, b.transform.position);
+        a.GetComponent<AudioSource>().Play();
+        b.GetComponent<AudioSource>().Play();
 
         var cableGo = Instantiate(CablePrefab) as GameObject;
         cableGo.transform.position = (a.transform.position + b.transform.position) / 2f;
@@ -140,6 +154,8 @@ public class Transmission : MonoBehaviour
         if (tower.OverloadProgress >= 1f)
         {
             tower.IsActive = false;
+            tower.GetComponent<AudioSource>().Stop();
+
             foreach (var r in tower.SideRenderers)
             {
                 r.material.SetFloat("_Fill", 0f);
@@ -158,8 +174,20 @@ public class Transmission : MonoBehaviour
             RefreshConnections();
 
             tower.OverloadProgress = 0f;
+            AudioSource.PlayClipAtPoint(PowerDownClip, tower.transform.position);
+            _skyCurrentColor = SkyColorOnPowerDown;
         }
 
+    }
+
+    private IEnumerator SkyColorCoroutine()
+    {
+        while (true)
+        {
+            _skyCurrentColor = Color.Lerp(_skyCurrentColor, SkyColorDefault, Time.deltaTime * 2.5f);
+            _skyMaterial.SetColor("_Color2", _skyCurrentColor);
+            yield return null;
+        }
     }
 
 }

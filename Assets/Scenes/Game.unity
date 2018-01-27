@@ -656,6 +656,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  PowerUpClip: {fileID: 8300000, guid: 16dda39202b61374780a752305bd5aa9, type: 3}
+  PowerDownClip: {fileID: 8300000, guid: 2de6b90d75484044580d358a630fdf02, type: 3}
+  SkyColorOnPowerDown: {r: 1, g: 0.38039216, b: 0.019607844, a: 1}
+  SkyColorDefault: {r: 0.08627451, g: 0.13333334, b: 0.18431373, a: 1}
 --- !u!4 &422797566
 Transform:
   m_ObjectHideFlags: 0
