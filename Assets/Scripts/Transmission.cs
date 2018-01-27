@@ -12,6 +12,9 @@ public class Transmission : MonoBehaviour
     public AnimationCurve OverloadRateToTowerCount;
     public AudioClip PowerUpClip;
     public AudioClip PowerDownClip;
+    public float TransmissionDuration;
+    public float TowerOverloadMin;
+    public float TowerOverloadMax;
 
     public Color SkyColorOnPowerDown;
     public Color SkyColorDefault;
@@ -20,6 +23,7 @@ public class Transmission : MonoBehaviour
     private readonly Dictionary<Tuple<Tower, Tower>, GameObject> _cables = new Dictionary<Tuple<Tower, Tower>, GameObject>();
     private List<Tower> _towers;
     private bool _isTransmissionFlowing;
+    private float _transmissionTimer;
     private Material _skyMaterial;
     private Color _skyCurrentColor;
 
@@ -127,13 +131,24 @@ public class Transmission : MonoBehaviour
     {
         if (_isTransmissionFlowing)
         {
-            FlowProgress += Time.deltaTime * 0.01f;
+            _transmissionTimer += Time.deltaTime;
         }
         else
         {
-            FlowProgress -= Time.deltaTime * 0.01f;
+            _transmissionTimer -= Time.deltaTime;
         }
-        FlowProgress = Mathf.Clamp(FlowProgress, 0f, 1f);
+
+        _transmissionTimer = Mathf.Max(0f, _transmissionTimer);
+
+        FlowProgress = _transmissionTimer / TransmissionDuration;
+        FlowProgress = Mathf.Max(FlowProgress, 0f);
+        if (FlowProgress >= 1f)
+        {
+            // Level done
+            FindObjectOfType<Game>().Success();
+            enabled = false;
+            return;
+        }
 
         foreach (var tower in _towers)
         {

@@ -52,4 +52,14 @@ public class Sfx : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         _isLandPlayable = true;
     }
+
+    public IEnumerator FadeOut()
+    {
+        var v = AudioSource.volume;
+        for (var f = 0f; f < 3f; f += Time.deltaTime)
+        {
+            AudioSource.volume = Mathf.Lerp(v, 0f, f);
+            yield return null;
+        }
+    }
 }

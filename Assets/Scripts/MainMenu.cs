@@ -41,6 +41,9 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator FadeOut()
     {
+        var aso = GetComponent<AudioSource>();
+        var v = aso.volume;
+
         _isStarting = true;
         const float duration = 3f;
         for (var f = 0f; f < duration; f += Time.deltaTime)
@@ -49,6 +52,8 @@ public class MainMenu : MonoBehaviour
             var c = WhiteScreen.color;
             c.a = t;
             WhiteScreen.color = c;
+
+            aso.volume = Mathf.Lerp(v, 0f, t);
             yield return null;
         }
         SceneManager.LoadScene("Game");
