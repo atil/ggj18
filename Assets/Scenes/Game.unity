@@ -214,8 +214,8 @@ GameObject:
   - component: {fileID: 91951381}
   - component: {fileID: 91951380}
   - component: {fileID: 91951379}
-  - component: {fileID: 91951383}
   - component: {fileID: 91951384}
+  - component: {fileID: 91951383}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -305,13 +305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f747be746445448d155fc85d601b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseRenderImage: 0
-  off: 0
+  UseRenderImage: 1
+  off: 1
   angleThreshold: 80
   depthWeight: 300
   _edgeDetectShader: {fileID: 4800000, guid: 3e24831ed036d434b94f00ca4f9ce98d, type: 3}
   _blendShader: {fileID: 4800000, guid: c7117cbaa097ddb4084f39707c05ee38, type: 3}
-  _edgeColor: {r: 1, g: 1, b: 1, a: 1}
+  _edgeColor: {r: 0.49411765, g: 0.6509804, b: 0.7490196, a: 1}
   _blurShader: {fileID: 4800000, guid: 0d76784124b05ac48885173d671af591, type: 3}
   _iteration: 4
   blurSpread: 0.6
