@@ -25,10 +25,16 @@ public class Transmission : MonoBehaviour
     {
         var tuple = new Tuple<Tower, Tower>(a, b);
         _connectedTowers.Add(tuple);
+        if (!a.IsActive)
+        {
+            a.OverloadProgress = 0f;
+        }
         a.IsActive = true;
-        a.OverloadProgress = 0f;
+        if (!b.IsActive)
+        {
+            b.OverloadProgress = 0f;
+        }
         b.IsActive = true;
-        b.OverloadProgress = 0f;
 
         var cableGo = Instantiate(CablePrefab) as GameObject;
         cableGo.transform.position = (a.transform.position + b.transform.position) / 2f;
@@ -41,18 +47,22 @@ public class Transmission : MonoBehaviour
 
     private void RefreshConnections()
     {
+        _isTransmissionFlowing = IsTherePathBetween(SourceTower, TargetTower);
+    }
+
+    private bool IsTherePathBetween(Tower a, Tower b)
+    {
         var towers = new Queue<Tower>();
-        towers.Enqueue(SourceTower);
+        towers.Enqueue(a);
 
         var visitedTowers = new HashSet<Tower>();
         while (towers.Count != 0)
         {
             var cur = towers.Dequeue();
             var ns = GetNeighborsOf(cur);
-            if (ns.Contains(TargetTower))
+            if (ns.Contains(b))
             {
-                _isTransmissionFlowing = true;
-                return;
+                return true;
             }
 
             visitedTowers.Add(cur);
@@ -62,7 +72,7 @@ public class Transmission : MonoBehaviour
             }
         }
 
-        _isTransmissionFlowing = false;
+        return false;
     }
 
     private List<Tower> GetNeighborsOf(Tower t)
@@ -87,11 +97,11 @@ public class Transmission : MonoBehaviour
     {
         if (_isTransmissionFlowing)
         {
-            FlowProgress += Time.deltaTime * 0.1f;
+            FlowProgress += Time.deltaTime * 0.01f;
         }
         else
         {
-            FlowProgress -= Time.deltaTime * 0.1f;
+            FlowProgress -= Time.deltaTime * 0.01f;
         }
         FlowProgress = Mathf.Clamp(FlowProgress, 0f, 1f);
 
@@ -107,11 +117,25 @@ public class Transmission : MonoBehaviour
     private void OverloadTower(Tower tower)
     {
         var ratio = (float)_towers.Count(t => t.IsActive && t.IsOverloadable) / _towers.Count(t => t.IsOverloadable);
-        tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio) * Time.deltaTime * 100f;
+        tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio) * Time.deltaTime 
+                                                                           * (IsTherePathBetween(SourceTower, tower) ? 0.05f : 0.01f);
+
+        if (tower.IsOverloadable)
+        {
+            foreach (var r in tower.SideRenderers)
+            {
+                r.material.SetFloat("_Fill", tower.OverloadProgress);
+            }
+        }
 
         if (tower.OverloadProgress >= 1f)
         {
             tower.IsActive = false;
+            foreach (var r in tower.SideRenderers)
+            {
+                r.material.SetFloat("_Fill", 0f);
+            }
+
             foreach (var tuple in _connectedTowers)
             {
                 if (tuple.Item1 == tower || tuple.Item2 == tower)
@@ -123,6 +147,8 @@ public class Transmission : MonoBehaviour
             _connectedTowers.RemoveAll(tuple => tuple.Item1 == tower || tuple.Item2 == tower);
             FindObjectOfType<CableController>().TowerOverloaded(tower);
             RefreshConnections();
+
+            tower.OverloadProgress = 0f;
         }
 
     }

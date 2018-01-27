@@ -327,6 +327,7 @@
     <None Include="Assets\Scripts\PostProcess\GaussianBlur\GaussianBlurFilter.shader" />
     <None Include="Assets\Scripts\PostProcess\MultiTapEdgeDetect.shader" />
     <None Include="Assets\Scripts\PostProcess\PProcessShader.shader" />
+    <None Include="Assets\Scripts\TowerSide.shader" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
   </ItemGroup>

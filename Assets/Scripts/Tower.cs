@@ -8,4 +8,5 @@ public class Tower : MonoBehaviour
     public bool IsOverloadable;
     public List<Tower> ConnectedTowers;
     public float OverloadProgress;
+    public Renderer[] SideRenderers;
 }
