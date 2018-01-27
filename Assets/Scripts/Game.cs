@@ -16,15 +16,13 @@ public class Game : MonoBehaviour
         {
             _duration = 75f;
             t.TransmissionDuration = 45f;
-            t.TowerOverloadMax = 40;
-            t.TowerOverloadMin = 10;
+            t.TowerOverloadRate = 0.04f;
         }
         else if (SceneManager.GetActiveScene().name == "Game3")
         {
             _duration = 100f;
             t.TransmissionDuration = 75f;
-            t.TowerOverloadMax = 110;
-            t.TowerOverloadMin = 20;
+            t.TowerOverloadRate = 0.01f;
         }
     }
 

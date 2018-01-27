@@ -13,8 +13,7 @@ public class Transmission : MonoBehaviour
     public AudioClip PowerUpClip;
     public AudioClip PowerDownClip;
     public float TransmissionDuration;
-    public float TowerOverloadMin;
-    public float TowerOverloadMax;
+    public float TowerOverloadRate;
 
     public Color SkyColorOnPowerDown;
     public Color SkyColorDefault;
@@ -155,15 +154,18 @@ public class Transmission : MonoBehaviour
             if (tower.IsOverloadable && tower.IsActive)
             {
                 OverloadTower(tower);
-            }   
+            }
         }
     }
 
     private void OverloadTower(Tower tower)
     {
-        var ratio = (float)_connectedTowers.Count / _towers.Count * _towers.Count - _towers.Count; 
-        tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio) * Time.deltaTime 
-                                                                           * (IsTherePathBetween(SourceTower, tower) ? 0.01f : 0.0025f);
+        var ratio = (float)_connectedTowers.Count / _towers.Count * _towers.Count - _towers.Count;
+        tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio)
+                                  * Time.deltaTime
+                                  * (IsTherePathBetween(SourceTower, tower)
+                                      ? TowerOverloadRate
+                                      : TowerOverloadRate / 4f);
 
         if (tower.IsOverloadable)
         {
