@@ -323,6 +323,7 @@
     <Compile Include="Assets\Scripts\FpsController.cs" />
     <Compile Include="Assets\Scripts\GrapplingHook.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\Music.cs" />
     <Compile Include="Assets\Scripts\PostProcess\CameraController.cs" />
     <Compile Include="Assets\Scripts\PostProcess\GaussianBlur\FilterTest.cs" />
     <Compile Include="Assets\Scripts\PostProcess\PProcessScript.cs" />
