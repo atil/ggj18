@@ -21,9 +21,16 @@ public class Transmission : MonoBehaviour
         _towers = FindObjectsOfType<Tower>().ToList();
     }
 
-    public void TowersConnected(Tower a, Tower b)
+    public bool TowersConnected(Tower a, Tower b)
     {
         var tuple = new Tuple<Tower, Tower>(a, b);
+        var otherTuple = new Tuple<Tower, Tower>(b, a);
+
+        if (_connectedTowers.Contains(tuple) || _connectedTowers.Contains(otherTuple))
+        {
+            return false;
+        }
+
         _connectedTowers.Add(tuple);
         if (!a.IsActive)
         {
@@ -43,6 +50,8 @@ public class Transmission : MonoBehaviour
         _cables.Add(tuple, cableGo);
 
         RefreshConnections();
+
+        return true;
     }
 
     private void RefreshConnections()
@@ -118,7 +127,7 @@ public class Transmission : MonoBehaviour
     {
         var ratio = (float)_towers.Count(t => t.IsActive && t.IsOverloadable) / _towers.Count(t => t.IsOverloadable);
         tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio) * Time.deltaTime 
-                                                                           * (IsTherePathBetween(SourceTower, tower) ? 0.05f : 0.01f);
+                                                                           * (IsTherePathBetween(SourceTower, tower) ? 0.025f : 0.005f);
 
         if (tower.IsOverloadable)
         {

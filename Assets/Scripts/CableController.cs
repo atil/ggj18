@@ -30,14 +30,24 @@ public class CableController : MonoBehaviour
                     // Finalize cable
                     if (hit.transform.GetComponent<Tower>() != _currentTower)
                     {
-                        FindObjectOfType<Transmission>().TowersConnected(hit.transform.GetComponent<Tower>(), _currentTower);
-                        Cable.gameObject.SetActive(false);
-                        _isActive = false;
-                        _currentTower = null;
-                    }
+                        var succ = FindObjectOfType<Transmission>().TowersConnected(hit.transform.GetComponent<Tower>(), _currentTower);
 
+                        if (succ)
+                        {
+                            Cable.gameObject.SetActive(false);
+                            _isActive = false;
+                            _currentTower = null;
+                        }
+                    }
                 }
             }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Cable.gameObject.SetActive(false);
+            _isActive = false;
+            _currentTower = null;
         }
 
         if (_isActive)

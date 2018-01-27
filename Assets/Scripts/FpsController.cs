@@ -104,6 +104,7 @@ public class FpsController : MonoBehaviour
     private bool _isGroundedInPrevFrame; // ...between frames
     private bool _isGonnaJump; // ...between FixedUpdate() and Update()
     private Vector3 _wishDirDebug; // ...between FixedUpdate() and OnGUI()
+    private float _stepClipDistanceCounter;
 
     private void Start()
     {
@@ -157,21 +158,35 @@ public class FpsController : MonoBehaviour
 
         if (isGrounded) // Ground move
         {
+            if (!_isGroundedInPrevFrame)
+            {
+                GetComponent<Sfx>().Play("Land");
+            }
+
             // Don't apply friction if just landed or about to jump
             // TODO: Actually this can be extended to multiple frames, to make it easier
             // Currently you have to catch that frame to be able to bhop
             if (_isGroundedInPrevFrame && !_isGonnaJump)
             {
                 ApplyFriction(ref _velocity, dt);
+
+                if (_stepClipDistanceCounter > 2f)
+                {
+                    _stepClipDistanceCounter = 0f;
+                    GetComponent<Sfx>().Play("Footstep");
+                }
+
             }
 
             Accelerate(ref _velocity, wishDir, GroundAccelerationCoeff, dt);
+
 
             _velocity.y = 0; // Ground movement always hard-resets vertical displacement
             if (_isGonnaJump)
             {
                 _isGonnaJump = false;
                 _velocity.y = JumpStrength;
+                GetComponent<Sfx>().Play("Jump");
             }
         }
         else // Air move
@@ -198,12 +213,14 @@ public class FpsController : MonoBehaviour
         // If we're moving too fast, make sure we don't hollow through any collider
         if (displacement.magnitude > _collisionElements[0].radius) // First collider is used as reference
         {
-            ClampDisplacement(ref _velocity, ref displacement, _transform.position);
+            //ClampDisplacement(ref _velocity, ref displacement, _transform.position);
         }
 
         _transform.position += displacement;
         _transform.position += collisionDisplacement; // Pushing out of environment
         _isGroundedInPrevFrame = isGrounded;
+
+        _stepClipDistanceCounter += (_velocity * dt).magnitude;
     }
 
     // Input receiving happens here
