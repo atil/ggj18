@@ -40,6 +40,13 @@ public class Transmission : MonoBehaviour
             return false;
         }
 
+        // Brilliant amk...
+        if ((a == SourceTower && b == TargetTower)
+            || (b == SourceTower && a == TargetTower))
+        {
+            return false;
+        }
+
         _connectedTowers.Add(tuple);
         if (!a.IsActive)
         {
@@ -141,7 +148,7 @@ public class Transmission : MonoBehaviour
     {
         var ratio = (float)_connectedTowers.Count / _towers.Count * _towers.Count - _towers.Count; 
         tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio) * Time.deltaTime 
-                                                                           * (IsTherePathBetween(SourceTower, tower) ? 0.025f : 0.005f);
+                                                                           * (IsTherePathBetween(SourceTower, tower) ? 0.01f : 0.0025f);
 
         if (tower.IsOverloadable)
         {

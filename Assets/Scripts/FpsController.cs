@@ -253,7 +253,7 @@ public class FpsController : MonoBehaviour
         // Reset player -- makes testing much easier
         if (Input.GetKeyDown(KeyCode.R))
         {
-            _transform.position = Vector3.zero + Vector3.up * 2f;
+            _transform.position = GameObject.Find("PlayerStart").transform.position + Vector3.up * 2f;
             _velocity = Vector3.forward;
             _hook.Reset();
         }
