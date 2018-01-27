@@ -322,6 +322,7 @@
     <Compile Include="Assets\Scripts\Drawing.cs" />
     <Compile Include="Assets\Scripts\FpsController.cs" />
     <Compile Include="Assets\Scripts\GrapplingHook.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Music.cs" />
     <Compile Include="Assets\Scripts\PostProcess\CameraController.cs" />

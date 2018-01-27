@@ -1,5 +1,30 @@
+Game:
+Atil Kockar
+@pingFromHeaven
+
+SFX:
+'Blendwave'
+https://beta.blendwave.net
+
 https://freesound.org/people/kretopi/sounds/406753/
 https://freesound.org/people/Timbre/sounds/372916/
 https://freesound.org/people/bass-95/sounds/72091/
+
+In-game music:
+'Fight or Die'
+A Drop A Day
 https://soundcloud.com/adrop_aday/24-fight-or-die-loop
+
+'The Shortest Path'
+A Drop A Day
 https://soundcloud.com/adrop_aday/21-the-shortest-path
+
+Menu music:
+'Spin'
+Jay Man - OurMusicBox
+http://www.youtube.com/c/ourmusicbox
+
+Menu font:
+'Astron Boy' and 'Astron Boy Wonder'
+Typodermic Fonts
+https://www.1001freefonts.com/astron-boy.font
