@@ -15,7 +15,7 @@ public class CableController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f)), out hit, 3f,
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f)), out hit, 2f,
                 (1 << LayerMask.NameToLayer("Tower"))))
             {
                 if (!_isActive)
@@ -24,6 +24,8 @@ public class CableController : MonoBehaviour
                     Cable.gameObject.SetActive(true);
                     _currentTower = hit.transform.GetComponent<Tower>();
                     _isActive = true;
+
+                    GetComponent<Sfx>().Play("Use");
                 }
                 else
                 {
@@ -37,6 +39,11 @@ public class CableController : MonoBehaviour
                             Cable.gameObject.SetActive(false);
                             _isActive = false;
                             _currentTower = null;
+                            GetComponent<Sfx>().Play("Use");
+                        }
+                        else
+                        {
+                            GetComponent<Sfx>().Play("Leave");
                         }
                     }
                 }
@@ -48,6 +55,7 @@ public class CableController : MonoBehaviour
             Cable.gameObject.SetActive(false);
             _isActive = false;
             _currentTower = null;
+            GetComponent<Sfx>().Play("Leave");
         }
 
         if (_isActive)

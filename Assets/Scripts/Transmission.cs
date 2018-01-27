@@ -125,7 +125,7 @@ public class Transmission : MonoBehaviour
 
     private void OverloadTower(Tower tower)
     {
-        var ratio = (float)_towers.Count(t => t.IsActive && t.IsOverloadable) / _towers.Count(t => t.IsOverloadable);
+        var ratio = (float)_connectedTowers.Count / _towers.Count * _towers.Count - _towers.Count; 
         tower.OverloadProgress += OverloadRateToTowerCount.Evaluate(ratio) * Time.deltaTime 
                                                                            * (IsTherePathBetween(SourceTower, tower) ? 0.025f : 0.005f);
 
@@ -161,4 +161,5 @@ public class Transmission : MonoBehaviour
         }
 
     }
+
 }
