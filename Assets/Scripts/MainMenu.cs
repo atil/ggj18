@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public Image WhiteScreen;
+    public Transform TitleParent;
     public AnimationCurve FadeInCurve;
     public AnimationCurve FadeOutCurve;
     public AnimationCurve AppearCurve;
@@ -15,6 +16,34 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         StartCoroutine(FadeIn());
+        var f = 0f;
+        foreach (Transform t in TitleParent)
+        {
+            StartCoroutine(WaveCoroutine(t, f));
+            f += 0.25f;
+        }
+
+        StartCoroutine(TitleRotateCoroutine());
+    }
+
+    private IEnumerator WaveCoroutine(Transform tr, float p)
+    {
+        var pos = tr.position;
+        while (true)
+        {
+            tr.position = pos + Vector3.up * Mathf.Sin(Time.time + p) * 100;
+            yield return null;
+        }
+    }
+
+    private IEnumerator TitleRotateCoroutine()
+    {
+        var f = TitleParent.rotation.eulerAngles.z;
+        while (true)
+        {
+            TitleParent.rotation = Quaternion.Euler(0, 0, f + Mathf.Sin(Time.time) * 10f);
+            yield return null;
+        }
     }
 
     public void PlayClicked()
