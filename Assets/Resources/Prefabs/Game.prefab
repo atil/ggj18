@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846599449623628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1063.576, y: 430.242, z: -16}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,3 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f644300cb2bae4a8b1f29d1f609240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SirenClip: {fileID: 8300000, guid: a947f6f98d64f7e4ca4eb0e992e8087e, type: 3}

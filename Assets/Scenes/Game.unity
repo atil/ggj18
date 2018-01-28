@@ -12959,15 +12959,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4160243207489726, guid: 1c49f9b025ccf1746985f178928eae7c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1063.576
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4160243207489726, guid: 1c49f9b025ccf1746985f178928eae7c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 430.242
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4160243207489726, guid: 1c49f9b025ccf1746985f178928eae7c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4160243207489726, guid: 1c49f9b025ccf1746985f178928eae7c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -13160,6 +13160,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114739926856782934, guid: cd8387249bb23a14e9ebcfc809efed30,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd8387249bb23a14e9ebcfc809efed30, type: 2}
   m_IsPrefabParent: 0
@@ -13335,7 +13340,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-218448
+  m_Name: pb_Mesh43730
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

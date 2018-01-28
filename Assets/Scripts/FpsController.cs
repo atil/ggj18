@@ -111,7 +111,7 @@ public class FpsController : MonoBehaviour
         Application.targetFrameRate = 60; // My laptop is shitty and burn itself to death if not for this
         _transform = transform;
         _mouseLook = new MouseLook(_camTransform);
-
+        Cursor.visible = false;
         _hook = new GrapplingHook(_hookVisual, _hookSlot, _camTransform.GetComponent<Camera>(), _excludedLayers);
     }
 

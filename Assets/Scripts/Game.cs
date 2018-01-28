@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+    public AudioClip SirenClip;
     private float _duration;
     private float _timer;
     private Ui _ui;
@@ -54,14 +55,25 @@ public class Game : MonoBehaviour
 
     private IEnumerator GameOver()
     {
-        FindObjectOfType<Transmission>().enabled = false;
-        StartCoroutine(FindObjectOfType<Sfx>().FadeOut());
-        yield return StartCoroutine(_ui.FadeOut());
+        var t = FindObjectOfType<Transmission>();
+        t.enabled = false;
+        t.SkyColorDefault = t.SkyColorOnPowerDown;
+
+        var m = FindObjectOfType<Music>().GetComponent<AudioSource>();
+        m.Stop();
+        m.PlayOneShot(SirenClip);
+
+        yield return StartCoroutine(_ui.FadeOutBlack());
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _timer = _duration;
+        }
+
         _timer += Time.deltaTime;
         if (_timer > _duration)
         {

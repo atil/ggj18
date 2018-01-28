@@ -8,6 +8,7 @@ public class Ui : MonoBehaviour
     public RectTransform FlowProgress;
     public RectTransform DurationProgress;
     public Image WhiteScreen;
+    public Image BlackScreen;
     public AnimationCurve FadeInCurve;
     public AnimationCurve FadeOutCurve;
 
@@ -45,6 +46,19 @@ public class Ui : MonoBehaviour
             var c = WhiteScreen.color;
             c.a = t;
             WhiteScreen.color = c;
+            yield return null;
+        }
+    }
+
+    public IEnumerator FadeOutBlack()
+    {
+        const float duration = 3f;
+        for (var f = 0f; f < duration; f += Time.deltaTime)
+        {
+            var t = FadeOutCurve.Evaluate(f / duration);
+            var c = BlackScreen.color;
+            c.a = t;
+            BlackScreen.color = c;
             yield return null;
         }
     }
