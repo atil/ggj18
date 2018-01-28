@@ -189,7 +189,7 @@ public class Transmission : MonoBehaviour
             {
                 if (tuple.Item1 == tower || tuple.Item2 == tower)
                 {
-                    Destroy(_cables[tuple]);
+                    StartCoroutine(DestroyCable(_cables[tuple]));
                     _cables.Remove(tuple);
                 }
             }
@@ -214,4 +214,11 @@ public class Transmission : MonoBehaviour
         }
     }
 
+    private IEnumerator DestroyCable(GameObject go)
+    {
+        go.GetComponent<Renderer>().enabled = false;
+        go.GetComponent<ParticleSystem>().Play();
+        yield return new WaitForSeconds(3f);
+        Destroy(go);
+    }
 }
