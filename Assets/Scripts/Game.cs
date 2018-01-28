@@ -12,17 +12,22 @@ public class Game : MonoBehaviour
     {
         _ui = FindObjectOfType<Ui>();
         var t = FindObjectOfType<Transmission>();
+        var aso = FindObjectOfType<Music>().GetComponent<AudioSource>();
         if (SceneManager.GetActiveScene().name == "Game")
         {
             _duration = 75f;
             t.TransmissionDuration = 45f;
-            t.TowerOverloadRate = 0.04f;
+            t.TowerOverloadRate = 0.03f;
+            aso.clip = Resources.Load<AudioClip>("Sfx/Music2_1");
+            aso.Play();
         }
         else if (SceneManager.GetActiveScene().name == "Game3")
         {
-            _duration = 100f;
-            t.TransmissionDuration = 75f;
-            t.TowerOverloadRate = 0.01f;
+            _duration = 130f;
+            t.TransmissionDuration = 90f;
+            t.TowerOverloadRate = 0.02f;
+            aso.clip = Resources.Load<AudioClip>("Sfx/Music1");
+            aso.Play();
         }
     }
 
