@@ -7,22 +7,29 @@ public class Ui : MonoBehaviour
 {
     public RectTransform FlowProgress;
     public RectTransform DurationProgress;
+    public RectTransform HookFuel;
     public Image WhiteScreen;
     public Image BlackScreen;
     public AnimationCurve FadeInCurve;
     public AnimationCurve FadeOutCurve;
 
     private Transmission _transmission;
+    private FpsController _fpsController;
 
     void Start()
     {
         _transmission = FindObjectOfType<Transmission>();
+        _fpsController = FindObjectOfType<FpsController>();
         StartCoroutine(FadeIn());
     }
 
     void Update()
     {
         FlowProgress.localScale = new Vector3(_transmission.FlowProgress, 1f, 1f);
+        if (_fpsController.HookEnabled && HookFuel != null)
+        {
+            HookFuel.transform.localScale = new Vector3(1, _fpsController.HookFuel, 1);
+        }
     }
 
     private IEnumerator FadeIn()

@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class FpsController : MonoBehaviour
 {
+    public bool HookEnabled;
+
 	// To be displayed in the UI
     public float HookFuel
     {
@@ -242,8 +244,11 @@ public class FpsController : MonoBehaviour
         {
             _isGonnaJump = false;
         }
-        
-        //_hook.Update(dt, _transform.position);
+
+        if (HookEnabled)
+        {
+            _hook.Update(dt, _transform.position);
+        }
 
         _camTransform.position = Vector3.Lerp(_camTransform.position, _transform.position, dt * 200f);
 
@@ -258,7 +263,10 @@ public class FpsController : MonoBehaviour
             _hook.Reset();
         }
 
-        //_hook.Draw();
+        if (HookEnabled)
+        {
+            _hook.Draw();
+        }
     }
 
     private void Accelerate(ref Vector3 playerVelocity, Vector3 accelDir, float accelCoeff, float dt)

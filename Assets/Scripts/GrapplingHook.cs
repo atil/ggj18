@@ -51,7 +51,7 @@ public class GrapplingHook
         if (State == HookState.Off)
         {
 			// Transition: Off -> Pull
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 RaycastHit hit;
                 if (Physics.Raycast(_mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f)), out hit, float.MaxValue, ~_excludedLayers))
@@ -67,7 +67,7 @@ public class GrapplingHook
         else if (State == HookState.Pull)
         {
 			// Transition: Pull -> Hold
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(1))
             {
                 State = HookState.Hold;
                 _hookLength = Vector3.Distance(playerPosition, _springEnd);
@@ -78,16 +78,16 @@ public class GrapplingHook
         else if (State == HookState.Hold)
         {
 			// Transition: Hold -> Pull
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 State = HookState.Pull;
             }
 			
 			// Transition: Hold -> Loose
-            if (Input.GetMouseButtonDown(1))
-            {
-                State = HookState.Loose;
-            }
+            //if (Input.GetMouseButtonDown(1))
+            //{
+            //    State = HookState.Loose;
+            //}
 
 			AdjustFuel(dt);
         }
@@ -171,7 +171,7 @@ public class GrapplingHook
     {
         _hookVisual.transform.position = (_springEnd + _hookSlot.position) / 2f;
         _hookVisual.transform.rotation = Quaternion.LookRotation(_springEnd - _hookSlot.position);
-        _hookVisual.transform.localScale = new Vector3(0.1f, 0.1f, Vector3.Distance(_springEnd, _hookSlot.position));
+        _hookVisual.transform.localScale = new Vector3(0.05f, 0.05f, Vector3.Distance(_springEnd, _hookSlot.position));
     }
 
     public void Reset()

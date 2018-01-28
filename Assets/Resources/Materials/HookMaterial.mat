@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SkyboxMaterial
-  m_Shader: {fileID: 4800000, guid: bba76ca6c63ba6949bcc87a9488fd89e, type: 3}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
+  m_Name: HookMaterial
+  m_Shader: {fileID: 4800000, guid: 71730fa5cfeb8eb4f9f8b8fd1b6f8bb1, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -59,11 +59,9 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Exponent: 0.6
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -72,12 +70,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UpVectorPitch: 0
-    - _UpVectorYaw: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 1}
-    - _Color2: {r: 0.08627446, g: 0.13333324, b: 0.18431363, a: 0.9999996}
+    - _Color: {r: 0.15294118, g: 0.25882354, b: 0.34901962, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UpVector: {r: 0, g: 1, b: 0, a: 0}
+    - _SideColor: {r: 0.74509805, g: 0.8117647, b: 0.8901961, a: 1}

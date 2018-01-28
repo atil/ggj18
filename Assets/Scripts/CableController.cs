@@ -50,7 +50,7 @@ public class CableController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(2))
         {
             Cable.gameObject.SetActive(false);
             _isActive = false;

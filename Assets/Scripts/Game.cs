@@ -30,6 +30,15 @@ public class Game : MonoBehaviour
             aso.clip = Resources.Load<AudioClip>("Sfx/Music1");
             aso.Play();
         }
+        else if (SceneManager.GetActiveScene().name == "Game2")
+        {
+            _duration = 180f;
+            t.TransmissionDuration = 90f;
+            t.TowerOverloadRate = 0.01f;
+            aso.clip = Resources.Load<AudioClip>("Sfx/Music1");
+            aso.Play();
+            FindObjectOfType<FpsController>().HookEnabled = true;
+        }
     }
 
     public void Success()
@@ -48,6 +57,10 @@ public class Game : MonoBehaviour
             SceneManager.LoadScene("Game3");
         }
         else if (SceneManager.GetActiveScene().name == "Game3")
+        {
+            SceneManager.LoadScene("Game2");
+        }
+        else if (SceneManager.GetActiveScene().name == "Game2")
         {
             SceneManager.LoadScene("Menu");
         }
@@ -69,6 +82,11 @@ public class Game : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Success();
+        }
+
         _timer += Time.deltaTime;
         if (_timer > _duration)
         {
