@@ -69,11 +69,6 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _timer = _duration;
-        }
-
         _timer += Time.deltaTime;
         if (_timer > _duration)
         {
