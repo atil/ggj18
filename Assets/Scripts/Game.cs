@@ -34,7 +34,7 @@ public class Game : MonoBehaviour
         {
             _duration = 180f;
             t.TransmissionDuration = 90f;
-            t.TowerOverloadRate = 0.01f;
+            t.TowerOverloadRate = 0.05f;
             aso.clip = Resources.Load<AudioClip>("Sfx/Music1");
             aso.Play();
             FindObjectOfType<FpsController>().HookEnabled = true;
