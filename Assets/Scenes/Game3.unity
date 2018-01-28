@@ -41613,6 +41613,11 @@ Prefab:
       propertyPath: m_Name
       value: SourceTower
       objectReference: {fileID: 0}
+    - target: {fileID: 114530948911599164, guid: 5f4dbdd90868b104fa0d65d0a03de271,
+        type: 2}
+      propertyPath: IsOverloadable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f4dbdd90868b104fa0d65d0a03de271, type: 2}
   m_IsPrefabParent: 0
@@ -41802,6 +41807,11 @@ Prefab:
     - target: {fileID: 1130181144694782, guid: 5f4dbdd90868b104fa0d65d0a03de271, type: 2}
       propertyPath: m_Name
       value: TargetTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 114530948911599164, guid: 5f4dbdd90868b104fa0d65d0a03de271,
+        type: 2}
+      propertyPath: IsOverloadable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f4dbdd90868b104fa0d65d0a03de271, type: 2}

@@ -23,7 +23,7 @@ public class Game : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Game3")
         {
-            _duration = 130f;
+            _duration = 140f;
             t.TransmissionDuration = 90f;
             t.TowerOverloadRate = 0.02f;
             aso.clip = Resources.Load<AudioClip>("Sfx/Music1");

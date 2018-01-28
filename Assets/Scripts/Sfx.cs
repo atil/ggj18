@@ -55,10 +55,14 @@ public class Sfx : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
+        var musicSource = FindObjectOfType<Music>().GetComponent<AudioSource>();
+        var vm = musicSource.volume;
+
         var v = AudioSource.volume;
         for (var f = 0f; f < 3f; f += Time.deltaTime)
         {
             AudioSource.volume = Mathf.Lerp(v, 0f, f);
+            musicSource.volume = Mathf.Lerp(vm, 0f, f);
             yield return null;
         }
     }
